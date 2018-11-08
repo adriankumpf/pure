@@ -127,6 +127,13 @@ function pre_prompt --on-event fish_prompt
     set pre_prompt $pre_prompt $user_and_host
   end
 
+  # Save last job id
+  set -l job_id (last_job_id)
+
+  if test -n "$job_id"
+    set pre_prompt $pre_prompt "$pure_color_cyan$pure_symbol_background_job$pure_color_normal "
+  end
+
   # Prompt command execution duration
   if test -n "$CMD_DURATION"
     set command_duration (__format_time $CMD_DURATION $pure_command_max_exec_time)
